@@ -4,112 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial Sentiment Analysis</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(120deg, #0a192f, #1a2a4f);
-            color: white;
-            text-align: center;
-            overflow: hidden;
-        }
-        .container {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 2s ease-in-out;
-        }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            animation: slideIn 1.5s ease-in-out;
-        }
-        p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            line-height: 1.6;
-            animation: fadeIn 2.5s ease-in-out;
-        }
-        .btn {
-            background-color: #ffcc00;
-            color: #1a2a4f;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            animation: pulse 2s infinite;
-        }
-        .btn:hover {
-            background-color: #ffdd44;
-            transform: scale(1.1);
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        .floating-icons {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        .floating-icons span {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 204, 0, 0.3);
-            border-radius: 50%;
-            animation: float 5s infinite ease-in-out;
-        }
-        @keyframes float {
-            0% { transform: translateY(0); opacity: 0.6; }
-            50% { transform: translateY(-20px); opacity: 1; }
-            100% { transform: translateY(0); opacity: 0.6; }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="floating-icons" id="floating-icons"></div>
     <div class="container">
-        <h1>Financial Sentiment Analysis</h1>
-        <p>Understand market trends through sentiment analysis. Analyze financial news, social media, and reports to make informed decisions.</p>
-        <button class="btn" onclick="predictSentiment()">Predict Sentiment</button>
+        <header>
+            <h1>Financial Sentiment Analysis</h1>
+        </header>
+        <main>
+            <section class="info">
+                <p>Analyze the market sentiment based on financial news, tweets, and reports.</p>
+                <p>Our AI-driven platform provides insights into bullish, bearish, or neutral sentiments.</p>
+            </section>
+            <button id="predictBtn">Predict Sentiment</button>
+        </main>
+        <footer>
+            <p>&copy; 2025 Financial Insights. All Rights Reserved.</p>
+        </footer>
     </div>
-    <script>
-        function predictSentiment() {
-            alert("Sentiment Prediction feature coming soon!");
-        }
-        function createFloatingIcons() {
-            const container = document.getElementById("floating-icons");
-            for (let i = 0; i < 15; i++) {
-                let span = document.createElement("span");
-                let size = Math.random() * 40 + 20;
-                span.style.width = `${size}px`;
-                span.style.height = `${size}px`;
-                span.style.top = `${Math.random() * 100}vh`;
-                span.style.left = `${Math.random() * 100}vw`;
-                span.style.animationDuration = `${Math.random() * 3 + 3}s`;
-                container.appendChild(span);
-            }
-        }
-        createFloatingIcons();
-    </script>
 </body>
 </html>
