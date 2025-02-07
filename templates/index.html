@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content=\"width=device-width, initial-scale=1.0\">
     <title>Financial Sentiment Analysis</title>
     <style>
         body {
@@ -42,12 +42,9 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            animation: pulse 2s infinite;
         }
         .btn:hover {
             background-color: #ffdd44;
-            transform: scale(1.1);
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -56,11 +53,6 @@
         @keyframes slideIn {
             from { transform: translateY(-50px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
         }
         .floating-icons {
             position: absolute;
@@ -90,11 +82,11 @@
     <div class="container">
         <h1>Financial Sentiment Analysis</h1>
         <p>Understand market trends through sentiment analysis. Analyze financial news, social media, and reports to make informed decisions.</p>
-        <button class="btn" onclick="predictSentiment()">Predict Sentiment</button>
+        <button class="btn" id="typing-button" onclick="predictSentiment()"></button>
     </div>
     <script>
         function predictSentiment() {
-            alert("Sentiment Prediction feature coming soon!");
+            window.location.href = "/predict";
         }
         function createFloatingIcons() {
             const container = document.getElementById("floating-icons");
@@ -110,6 +102,22 @@
             }
         }
         createFloatingIcons();
+
+        function typeEffect(element, text, speed) {
+            let index = 0;
+            function type() {
+                if (index < text.length) {
+                    element.innerHTML += text.charAt(index);
+                    index++;
+                    setTimeout(type, speed);
+                } else {
+                    element.innerHTML += " 🚀";
+                }
+            }
+            type();
+        }
+        const button = document.getElementById("typing-button");
+        typeEffect(button, "Predict Sentiment", 100);
     </script>
 </body>
 </html>
