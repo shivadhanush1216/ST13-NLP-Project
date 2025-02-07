@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Sentiment Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0a3d62;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #1e3799;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        h2 {
+            color: #fbc531;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+        .submit-btn {
+            background: #44bd32;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .submit-btn:hover {
+            background: #4cd137;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Financial Sentiment Analysis</h2>
+        <form action="/predict" method="post">
+            <textarea name="message" placeholder="Enter your financial message here..." required></textarea>
+            <br>
+            <button type="submit" class="submit-btn">Analyze</button>
+        </form>
+    </div>
+</body>
+</html>
