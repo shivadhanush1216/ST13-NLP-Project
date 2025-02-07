@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Sentiment Analysis</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #1f1f1f;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            text-align: center;
+        }
+        h1 {
+            color: #ffab00;
+        }
+        .input-container {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #333;
+            color: #e0e0e0;
+            border: 1px solid #444;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px 0;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button#submit {
+            background-color: #ffab00;
+            color: #121212;
+        }
+        button#no-sentiment {
+            background-color: #555;
+            color: #e0e0e0;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #333;
+        }
+        .positive {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+        .negative {
+            background-color: #f44336;
+            color: #fff;
+        }
+        .neutral {
+            background-color: #9E9E9E;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Financial Sentiment Analysis</h1>
+        <form action="/predict" method="POST" id="sentimentForm">
+            <div class="input-container">
+                <input type="text" name="message" id="message" placeholder="Enter financial news or statement..." required>
+            </div>
+            <button type="submit" id="submit">Analyze Sentiment</button>
+            <button type="button" id="no-sentiment">No Sentiment</button>
+        </form>
+        <div class="result" id="result" style="display: none;">
+            <!-- Result will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        // Handle form submission and prevent default behavior for the sake of the demo
+        document.getElementById('sentimentForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission for demonstration purposes
+            analyzeSentiment();
+        });
+
+        // Button to simulate no sentiment
+        document.getElementById('no-sentiment').addEventListener('click', function() {
+            displayResult("No Sentiment", "neutral");
+        });
+
+        // Simulate sentiment analysis result (In real-world, this would involve backend processing)
+        function analyzeSentiment() {
+            var message = document.getElementById('message').value;
+
+            // Simple simulation for demo purposes
+            var result = "neutral";
+            var sentimentMessage = "Neutral sentiment detected.";
+
+            // Example of financial sentiment keywords
+            if (message.includes("profit") || message.includes("growth") || message.includes("gain")) {
+                result = "positive";
+                sentimentMessage = "Positive sentiment detected!";
+            } else if (message.includes("loss") || message.includes("decline") || message.includes("fall")) {
+                result = "negative";
+                sentimentMessage = "Negative sentiment detected!";
+            }
+
+            displayResult(sentimentMessage, result);
+        }
+
+        // Function to display the result
+        function displayResult(message, sentimentClass) {
+            var resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result ' + sentimentClass;
+            resultDiv.innerHTML = message;
+        }
+    </script>
+
+</body>
+</html>
