@@ -30,15 +30,6 @@
             max-width: 600px;
             animation: fadeIn 3s ease-in-out;
         }
-        .input-box {
-            padding: 10px;
-            font-size: 1rem;
-            width: 300px;
-            margin-top: 20px;
-            border-radius: 5px;
-            border: none;
-            text-align: center;
-        }
         .btn {
             background: #ffcc00;
             color: #000;
@@ -47,7 +38,6 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            margin-top: 20px;
             transition: transform 0.3s, background 0.3s;
             animation: bounce 2s infinite;
         }
@@ -83,18 +73,12 @@
     <div class="container">
         <h1>Finance Sentiment Analysis</h1>
         <p>Analyze market sentiments and gain insights into financial trends using advanced AI models.</p>
-        <input type="text" id="inputText" class="input-box" placeholder="Enter financial text...">
         <button id="predictButton" class="btn">Predict Sentiment</button>
     </div>
 
     <script>
         document.getElementById('predictButton').addEventListener('click', function() {
-            const inputText = document.getElementById('inputText').value;
-            if (!inputText) {
-                alert('Please enter some text!');
-                return;
-            }
-            window.location.href = `/predict?text=${encodeURIComponent(inputText)}`;
+            window.location.href = '/predict';
         });
 
         function createFloatingCoins() {
