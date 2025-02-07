@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Sentiment Analysis</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 3rem;
+            animation: fadeIn 2s ease-in-out;
+        }
+        p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            animation: fadeIn 3s ease-in-out;
+        }
+        .input-box {
+            padding: 10px;
+            font-size: 1rem;
+            width: 300px;
+            margin-top: 20px;
+            border-radius: 5px;
+            border: none;
+            text-align: center;
+        }
+        .btn {
+            background: #ffcc00;
+            color: #000;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s, background 0.3s;
+            animation: bounce 2s infinite;
+        }
+        .btn:hover {
+            background: #ffdd44;
+            transform: scale(1.1);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .floating-coins {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: gold;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: float 5s infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-50px); }
+            100% { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Finance Sentiment Analysis</h1>
+        <p>Analyze market sentiments and gain insights into financial trends using advanced AI models.</p>
+        <input type="text" id="inputText" class="input-box" placeholder="Enter financial text...">
+        <button id="predictButton" class="btn">Predict Sentiment</button>
+    </div>
+
+    <script>
+        document.getElementById('predictButton').addEventListener('click', function() {
+            const inputText = document.getElementById('inputText').value;
+            if (!inputText) {
+                alert('Please enter some text!');
+                return;
+            }
+            window.location.href = `/predict?text=${encodeURIComponent(inputText)}`;
+        });
+
+        function createFloatingCoins() {
+            for (let i = 0; i < 10; i++) {
+                let coin = document.createElement('div');
+                coin.className = 'floating-coins';
+                document.body.appendChild(coin);
+                coin.style.left = Math.random() * window.innerWidth + 'px';
+                coin.style.top = Math.random() * window.innerHeight + 'px';
+                coin.style.animationDelay = Math.random() * 5 + 's';
+            }
+        }
+        createFloatingCoins();
+    </script>
+</body>
+</html>
