@@ -10,6 +10,7 @@ def predict():
     if request.method=="POST":
         msg=request.form.get("message")
         print(msg)
+        
     else:
         return render_template("predict.html")
       
