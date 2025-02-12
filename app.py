@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,jsonify
 from test import TextToNum
 import pickle
 
@@ -30,6 +30,10 @@ def predict():
 
         pred=model.predict(vcdata)
         print(pred)
+        sentiment_map = {1: "Positive 😊", 0: "Neutral 😐", -1: "Negative 😢"}
+        sentiment = sentiment_map.get(pred[0], "Unknown")
+
+        return render_template("result.html",sentiment=sentiment)
        
 
 
