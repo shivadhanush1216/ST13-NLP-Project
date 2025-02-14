@@ -8,8 +8,8 @@ from nltk.stem import PorterStemmer
 
 
 class TextToNum:
-    def __init__(self,text):
-        self.text=text
+    def __init__(self, text):  # Initialize text when the object is created
+        self.text = text 
 
     def cleaner(self):
         text = re.sub(r',','',self.text)
@@ -29,10 +29,3 @@ class TextToNum:
         ps=PorterStemmer()
         self.st = [ps.stem(word) for word in self.cl]
         return self.st
-    
-
-    
-
-
-
-    
