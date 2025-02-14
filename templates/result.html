@@ -1,70 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sentiment Result</title>
-    <style>
-        body {
-            background: #121212;
-            color: white;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sentiment Result</title>
+  <style>
+    /* Animated Gradient Background */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(-45deg, #121212, #1a1a1a, #222222, #2c2c2c);
+      background-size: 400% 400%;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      animation: gradientAnimation 10s ease infinite;
+    }
 
-        .result-box {
-            padding: 20px 40px;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 2rem;
-            font-weight: bold;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-            opacity: 0;
-            animation: fadeIn 1s ease-in-out forwards;
-        }
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: scale(0.9); }
-            100% { opacity: 1; transform: scale(1); }
-        }
+    /* Container for the card */
+    .container {
+      perspective: 1000px;
+      position: relative;
+      z-index: 2;
+    }
 
-        .positive {
-            background: #00ff88;
-            color: #121212;
-            box-shadow: 0 0 20px #00ff88;
-        }
+    /* Card styling */
+    .card {
+      width: 300px;
+      height: 200px;
+      background-color: rgba(30, 30, 30, 0.8);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transform-style: preserve-3d;
+      animation: float 5s infinite ease-in-out;
+      
+    }
 
-        .neutral {
-            background: #999;
-            color: #121212;
-            box-shadow: 0 0 20px #999;
-        }
+    /* Floating animation */
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotateX(0) rotateY(0);
+      }
+      50% {
+        transform: translateY(-20px) rotateX(10deg) rotateY(10deg);
+      }
+    }
 
-        .negative {
-            background: #ff4444;
-            color: #121212;
-            box-shadow: 0 0 20px #ff4444;
-        }
-    </style>
+    /* Result text styling */
+    .result-text {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      transition: color 0.5s ease;
+    }
+
+    /* Result icon styling */
+    .result-icon {
+      font-size: 48px;
+      animation: bounce 2s infinite;
+    }
+
+    /* Bounce animation for the icon */
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="result-box" id="result">{{ sentiment }}</div>
+  <!-- Card Container -->
+  <div class="container">
+    <div class="card">
+      <div class="result-text" id="result-text">Loading...</div>
+      <div class="result-icon" id="result-icon"></div>
+    </div>
+  </div>
 
-    <script>
-        const resultBox = document.getElementById('result');
-        const sentiment = resultBox.innerText;
+  <script>
+    // Simulate the result from the backend (replace this with your actual data fetching logic)
+    const result = 1; // Replace with `pred[0]` from your backend
 
-        if (sentiment.includes("Positive")) {
-            resultBox.classList.add("positive");
-        } else if (sentiment.includes("Neutral")) {
-            resultBox.classList.add("neutral");
-        } else if (sentiment.includes("Negative")) {
-            resultBox.classList.add("negative");
-        }
-    </script>
+    // Update the UI based on the result
+    const resultText = document.getElementById('result-text');
+    const resultIcon = document.getElementById('result-icon');
+
+    if (result === 1) {
+      resultText.textContent = 'Positive';
+      resultText.style.color = '#4CAF50'; // Green for positive
+      resultIcon.innerHTML = '😊'; // Smiley face for positive
+    } else if (result === 0) {
+      resultText.textContent = 'Neutral';
+      resultText.style.color = '#FFC107'; // Yellow for neutral
+      resultIcon.innerHTML = '😐'; // Neutral face for neutral
+    } else if (result === -1) {
+      resultText.textContent = 'Negative';
+      resultText.style.color = '#F44336'; // Red for negative
+      resultIcon.innerHTML = '😔'; // Sad face for negative
+    }
+  </script>
 </body>
 </html>
