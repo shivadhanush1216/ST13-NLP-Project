@@ -1,21 +1,40 @@
 from flask import Flask, render_template, request, jsonify
 import pickle
+import os
 import re
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 # Download NLTK stopwords (only needed once)
 nltk.download('stopwords')
 
 app = Flask(__name__)
 
-# Load vectorizer and model once at startup
-with open("vectorizer.pickle", "rb") as vc:
+# Check if vectorizer exists, else create and save one
+VECTOR_PATH = "vectorizer.pickle"
+MODEL_PATH = "model.pickle"
+
+if not os.path.exists(VECTOR_PATH):
+    print("Vectorizer not found! Training and saving a new one...")
+    sample_texts = ["This is an example", "Text processing in NLP", "Machine learning and AI"]
+    vectorizer = TfidfVectorizer()
+    vectorizer.fit(sample_texts)
+    
+    with open(VECTOR_PATH, "wb") as f:
+        pickle.dump(vectorizer, f)
+    print("New vectorizer saved successfully!")
+
+# Load vectorizer and model
+with open(VECTOR_PATH, "rb") as vc:
     vectorizer = pickle.load(vc)
 
-with open("model.pickle", "rb") as mc:
-    model = pickle.load(mc)
+if os.path.exists(MODEL_PATH):
+    with open(MODEL_PATH, "rb") as mc:
+        model = pickle.load(mc)
+else:
+    model = None  # Handle the case where the model is missing
 
 # Text preprocessing class
 class TextToNum:
@@ -72,6 +91,10 @@ def predict():
         # Vectorize input text
         vcdata = vectorizer.transform([stem_vector]).toarray()
         print(f"Vectorized Data: {vcdata}")
+
+        # Ensure model is loaded
+        if model is None:
+            return jsonify({"error": "Model file missing"}), 500
 
         # Make prediction
         pred = model.predict(vcdata)
